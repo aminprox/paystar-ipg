@@ -8,11 +8,11 @@ use PayStar\Ipg\Facades\Encryption;
 
 class PayStar
 {
-    private $createUrl = 'https://core.paystar.ir/api/pardakht/create';
+    private $createUrl = 'https://api.paystar.shop/api/pardakht/create';
 
-    private $paymentUrl = 'https://core.paystar.ir/api/pardakht/payment';
+    private $paymentUrl = 'https://api.paystar.shop/api/pardakht/payment';
 
-    private $verifyUrl = 'https://core.paystar.ir/api/pardakht/verify';
+    private $verifyUrl = 'https://api.paystar.shop/api/pardakht/verify';
 
     public function create($amount, $orderId, $callbackUrl, $sign, $option = [])
     {
@@ -41,6 +41,8 @@ class PayStar
                 $parameters = array_merge($parameters, ['wallet_hashid' => $option['wallet_hashid']]);
             if (isset($option['national_code']))
                 $parameters = array_merge($parameters, ['national_code' => $option['national_code']]);
+            if (isset($option['card_number']))
+                $parameters = array_merge($parameters, ['card_number' => $option['card_number']]);
 
             $response = Http::withHeaders([
                 'Content-Type'  => 'application/json',
