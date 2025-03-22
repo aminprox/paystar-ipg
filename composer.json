@@ -1,11 +1,11 @@
 {
-    "name": "2/laravel-ipg",
+    "name": "paystar2/laravel-ipg",
     "type": "library",
-    "description": "A package for  payment gateway and Those for whom time is important",
+    "description": "A package for PayStar payment gateway and Those for whom time is important",
     "keywords": [
         "pay star",
         "ipg",
-        " ipg",
+        "paystar ipg",
         "bank gateway",
         "iranian bank",
         "bank",
@@ -15,7 +15,7 @@
         "fast pay",
         "fast payment"
     ],
-    "homepage": "https://github.com/aminprox/-ipg",
+    "homepage": "https://github.com/aminprox/paystar-ipg",
     "license": "MIT",
     "authors": [
         {
@@ -30,16 +30,16 @@
     },
     "autoload": {
         "psr-4": {
-            "\\Ipg\\": "src/"
+            "PayStar\\Ipg\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "\\Ipg\\IpgServiceProvider"
+                "PayStar\\Ipg\\PayStarIpgServiceProvider"
             ],
             "aliases": {
-                "Ipg" : "\\Ipg\\Facades\\Ipg"
+                "PayStarIpg" : "PayStar\\Ipg\\Facades\\PayStarIpg"
             }
         }
     }
