@@ -5,11 +5,11 @@
 <div align="center">
     
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/paystar/laravel-ipg.svg?style=flat-square)](https://packagist.org/packages/paystar/laravel-ipg)
-[![GitHub issues](https://img.shields.io/github/issues/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/issues)
-[![GitHub stars](https://img.shields.io/github/stars/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/network)
+[![GitHub issues](https://img.shields.io/github/issues/aminprox/paystar-ipg?style=flat-square)](https://github.com/aminprox/paystar-ipg/issues)
+[![GitHub stars](https://img.shields.io/github/stars/aminprox/paystar-ipg?style=flat-square)](https://github.com/aminprox/paystar-ipg/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/aminprox/paystar-ipg?style=flat-square)](https://github.com/aminprox/paystar-ipg/network)
 [![Total Downloads](https://img.shields.io/packagist/dt/paystar/laravel-ipg.svg?style=flat-square)](https://packagist.org/packages/paystar/laravel-ipg)
-[![GitHub license](https://img.shields.io/github/license/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/aminprox/paystar-ipg?style=flat-square)](https://github.com/aminprox/paystar-ipg/blob/master/LICENSE)
     
 </div>
 
