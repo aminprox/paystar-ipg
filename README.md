@@ -5,11 +5,11 @@
 <div align="center">
     
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/paystar/laravel-ipg.svg?style=flat-square)](https://packagist.org/packages/paystar/laravel-ipg)
-[![GitHub issues](https://img.shields.io/github/issues/imvahid/paystar-ipg?style=flat-square)](https://github.com/imvahid/paystar-ipg/issues)
-[![GitHub stars](https://img.shields.io/github/stars/imvahid/paystar-ipg?style=flat-square)](https://github.com/imvahid/paystar-ipg/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/imvahid/paystar-ipg?style=flat-square)](https://github.com/imvahid/paystar-ipg/network)
+[![GitHub issues](https://img.shields.io/github/issues/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/issues)
+[![GitHub stars](https://img.shields.io/github/stars/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/network)
 [![Total Downloads](https://img.shields.io/packagist/dt/paystar/laravel-ipg.svg?style=flat-square)](https://packagist.org/packages/paystar/laravel-ipg)
-[![GitHub license](https://img.shields.io/github/license/imvahid/paystar-ipg?style=flat-square)](https://github.com/imvahid/paystar-ipg/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/amin-rezaei-sk/paystar-ipg?style=flat-square)](https://github.com/amin-rezaei-sk/paystar-ipg/blob/master/LICENSE)
     
 </div>
 
@@ -64,42 +64,48 @@ php artisan vendor:publish --tag=paystar-ipg
     ###### How to use this options
     ```php
     <?php
-    use PayStar\Ipg\Facades\PayStarIpg;
-    
-  PayStarIpg::amount('AMOUNT') // *
-        ->orderId('ORDER_ID') // *
-        ->callbackUrl('CALLBACK_URL') // If You don't use this method, we set this from config
-        ->sign('SIGN') // If You don't use this method, we generate auto a sign
-        ->option([
-            'name'            => 'Name',
-            'phone'           => 'PHONE',
-            'mail'            => 'MAIL',
-            'description'     => 'DESCRIPTION',
-            'allotment'       => 'ALLOTMENT',
-            'callback_method' => 'CALLBACK_METHOD',
-            'wallet_hashid'   => 'WALLET_HASHID',
-            'national_code'   => 'NATIONAL_CODE',
-        ])
-        ->create();
+        use PayStar\Ipg\Driver\PayStar;
+        use PayStar\Ipg\Facades\Encryption;
+                $paystar = new PayStar();
+                $res = $paystar->create($amount, $payment->id, route('callback', ['additional|_parameters' => 'additional_parameters']),null,
+                [
+                    'national_code' => 'National ID',
+                    'card_number' => 'Card Number',
+                    'callback_method' => 1
+                ]);
+                $result = $res->json();
+                if ($result['status'] === 1) {
+                    $payment->reference_id = $result['data']['ref_num'];
+                    $payment->save();
+                    return \redirect("https://api.paystar.shop/api/pardakht/payment?token={$result['data']['token']}");
+                }
     ```
 
 - #### Use <code>verify()</code> method
     ```php
     <?php
-    use PayStar\Ipg\Facades\PayStarIpg;
-    
-    PayStarIpg::amount('AMOUNT')
-        ->refNum('REF_NUM')
-        ->sign('SIGN')
-        ->verify();
-    ```
-
-- #### Use <code>payment()</code> method
-    ```php
-    <?php
-    use PayStar\Ipg\Facades\PayStarIpg;
-    // Redirect to Gateway
-    PayStarIpg::token('TOKEN')->payment();
+        use PayStar\Ipg\Driver\PayStar;
+        use PayStar\Ipg\Facades\Encryption;
+        $paystar = new PayStar();
+        $sign = Encryption::hash(
+                    config('paystar-ipg.encryption_algorithm'),
+                    $payment->amount . '#'.
+                    $request->input('ref_num') . '#'.
+                    $request->input('card_number') . '#'.
+                    $request->input('tracking_code'),
+                    config('paystar-ipg.encryption_key')
+        );
+        if (request()->input('status') > 0 && !$last_4_digit_of_users_card_number != substr($request->input('card_number'), -4)) {
+            throw new \Exception(__('Card doesnt belong to the user!'));
+        }
+        $res = $paystar->verify($payment->reference_id, $payment->amount, $sign);
+        $result = $res->json();
+        if ($result['status'] === 1) {
+            $amount = $result['data']['price'];
+            $trackingCode = $request->input('tracking_code');
+        } else {
+            throw new \Exception(__('Payment failed!'));
+        }
     ```
 
 --------------------------
@@ -121,5 +127,5 @@ Encryption::hash($algo, $string, $key, $binary); // use hash_hmac() method
 
 ### :man_technologist: Author
 
-- [Github](https://github.com/imvahid)
-- [linkedin](https://www.linkedin.com/in/imvahid)
+- [Github](https://github.com/aminprox)
+- [linkedin](https://www.linkedin.com/in/amin-rezaei-sk)
