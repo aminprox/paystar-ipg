@@ -19,7 +19,7 @@
 
 #### Install package
 ```bash
-composer require paystar/laravel-ipg
+composer require paystar3/laravel-ipg
 ```
 #### Publish configs
 
