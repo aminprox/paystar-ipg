@@ -39,16 +39,6 @@ php artisan vendor:publish --tag=paystar-ipg
 ### :heavy_check_mark: How to use exists methods and options
 
 - #### Use <code>create()</code> method
-    ```php
-    <?php
-    use PayStar\Ipg\Facades\PayStarIpg;
-    
-    PayStarIpg::amount('AMOUNT') // *
-        ->orderId('ORDER_ID') // *
-        ->callbackUrl('CALLBACK_URL') // If You don't use this method, we set this from config
-        ->sign('SIGN') // If You don't use this method, we generate auto a sign
-        ->create();
-    ```
     ###### List of extra option
     | Option  | description |
     |---| ------------- |
