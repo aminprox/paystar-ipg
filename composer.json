@@ -1,13 +1,13 @@
 {
-    "name": "paystar2/laravel-ipg",
+    "name": "paystar3/laravel-ipg",
     "type": "library",
-    "description": "A package for PayStar payment gateway and Those for whom time is important",
+    "description": "A package for PayStar payment gateway and those for whom time is important",
     "keywords": [
         "pay star",
         "ipg",
         "paystar ipg",
         "bank gateway",
-        "iranian bank",
+        "Iranian bank",
         "bank",
         "payment",
         "online pay",
@@ -19,14 +19,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Vahid Ashourzadeh",
-            "email": "v.ashourzdeh@gmail.com"
+            "name": "Amin Rezaei",
+            "email": "amin.cccx@gmail.com"
         }
     ],
     "minimum-stability": "dev",
     "require": {
         "php": "7.*|8.*",
-        "laravel/framework": "7.*|8.*|9.*"
+        "laravel/framework": "7.*|8.*|9.*|10.*|11.*|12.*"
     },
     "autoload": {
         "psr-4": {
